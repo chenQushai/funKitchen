@@ -1,92 +1,103 @@
 <template>
-	<view class="content">
-		<view v-if="hasLogin" class="hello">
-			<view class="title">
-				您好 {{userName}}，您已成功登录。
-			</view>
-			<view class="ul">
-				<view>这是 uni-app 带登录模板的示例App首页。</view>
-				<view>在 “我的” 中点击 “退出” 可以 “注销当前账户”</view>
-			</view>
-		</view>
-		<view v-if="!hasLogin" class="hello">
-			<view class="title">
-				您好 游客。
-			</view>
-			<view class="ul">
-				<view>这是 uni-app 带登录模板的示例App首页。</view>
-				<view>在 “我的” 中点击 “登录” 可以 “登录您的账户”</view>
-			</view>
-		</view>
-	</view>
+    <view class="content">
+        <div class="scan-box">
+            <div class="input-box">
+                <!--<icon :type="'search'" style="float: left;padding-top: 15upx" size="13"/>-->
+                <icon :type="'search'" style="padding-left: 15upx;display: inline-block;float: left;margin-top: 20upx"
+                      size="14"/>
+                <input class="uni-input input" confirm-type="search" value="搜索"/>
+            </div>
+            <button type="primary" class="search-btn" size="mini">搜索</button>
+        </div>
+
+        <div class="navTab">
+            <div class="tab" :class="tabActive?'tab-active':''" @click="changeTab(0)">今日推荐</div>
+            <div class="tab" :class="!tabActive? 'tab-active':''" @click="changeTab(1)">排行榜</div>
+        </div>
+
+    </view>
 </template>
 
 <script>
-	import {
-		mapState,
-		mapMutations
-	} from 'vuex'
+    export default {
+        data() {
+            return {
+                tabActive:true
+            }
+        },
+        methods: {
+            changeTab(index) {
+                if (index === 0) {
+                    this.tabActive = true
+                }
+                else {
+                    this.tabActive = false;
+                }
+            }
+        },
+        onLoad() {
 
-	export default {
-		computed: mapState(['forcedLogin', 'hasLogin', 'userName']),
-		methods:{
-			...mapMutations(['login']),
-		},
-		onLoad() {
 
-			if (!this.hasLogin) {
-				uni.showModal({
-					title: '未登录',
-					content: '您未登录，需要登录后才能继续',
-					/**
-					 * 如果需要强制登录，不显示取消按钮
-					 */
-					showCancel: !this.forcedLogin,
-					success: (res) => {
-						if (res.confirm) {
-							/**
-							 * 如果需要强制登录，使用reLaunch方式
-							 */
-							if (this.forcedLogin) {
-								uni.reLaunch({
-									url: '../login/login'
-								});
-							} else {
-								uni.navigateTo({
-									url: '../login/login'
-								});
-							}
-						}
-					}
-				});
-			}
-		},
-		mounted() {
-			this.login('jack')
-			console.log(this.$store.state.userName)
-		}
-	}
+        },
+        mounted() {
+        }
+    }
 </script>
 
-<style>
-	.hello {
-		display: flex;
-		flex: 1;
-		flex-direction: column;
-	}
+<style scoped lang="scss">
+    .scan-box {
+        width: 100%;
+        height: 90upx;
+        padding-top: 20upx;
 
-	.title {
-		color: #8f8f94;
-		margin-top: 25px;
-	}
+        .input-box {
+            float: left;
+            width: 70%;
+            height: 74upx;
+            background-color: rgb(240, 240, 240);
+            border-radius: 74upx;
+            padding-left: 20upx;
+            line-height: 64upx;
+            .input {
+                float: left;
+                display: inline-block;
+                width: 80%;
+                margin-left: 37upx;
+                margin-top: 13upx;
+                color: rgb(154, 154, 154);
+                font-size: 12px;
+            }
+        }
+        .search-btn {
+            width: 150upx;
+            height: 74upx;
+            border-radius: 64upx;
+            line-height: 74upx;
+            margin-left: 40upx;
+            background-color: rgb(100, 100, 100);
+        }
+    }
 
-	.ul {
-		font-size: 15px;
-		color: #8f8f94;
-		margin-top: 25px;
-	}
-
-	.ul>view {
-		line-height: 25px;
-	}
+    .navTab {
+        width: 100%;
+        height: 75upx;
+        margin-top: 10upx;
+        display: flex;
+        flex-direction: row;
+        .tab {
+            width: 50%;
+            height: 100%;
+            line-height: 75upx;
+            font-size: 20upx;
+            border-radius: 15upx;
+            color: black;
+            text-align: center;
+            font-size: 35upx;
+            font-family: "微软雅黑";
+        }
+        .tab-active {
+            background-color: black;
+            color: rgb(255,255,255);
+        }
+    }
 </style>
