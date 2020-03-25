@@ -15,6 +15,24 @@
             <div class="tab" :class="!tabActive? 'tab-active':''" @click="changeTab(1)">排行榜</div>
         </div>
 
+        <div class="content-box" v-show="tabActive">
+            <div class="menu-recommend">
+                <swiper style="width: 100%;height: 100%" class="swiper" :indicator-active-color="'#FFCE6B'" :indicator-dots="true" :autoplay="true" :interval="5000" :duration="500">
+                    <swiper-item :key="index" v-for="(r,index) in recomList">
+                        <img :src="r.url" style="object-fit: cover;width: 100%;height: 100%" alt="菜单推荐">
+                    </swiper-item>            
+                </swiper>
+            </div>
+            <p style="line-height: 40upx;
+            font-size: 38upx;font-family: 微软雅黑;
+            text-align: center;margin-top: 20upx;
+            font-weight: bold">-
+                <span></span>今日精选推荐 <span></span>-</p>
+
+        </div>
+        <div class="content-box" v-show="!tabActive">
+
+        </div>
     </view>
 </template>
 
@@ -22,7 +40,18 @@
     export default {
         data() {
             return {
-                tabActive:true
+                tabActive:true,
+                recomList: [
+                    {
+                        url: require('../../static/img/1.jpg')
+                    },
+                    {
+                        url: require('../../static/img/2.jpg')
+                    },
+                    {
+                        url: require('../../static/img/3.jpg')
+                    }
+                ]
             }
         },
         methods: {
@@ -100,4 +129,14 @@
             color: rgb(255,255,255);
         }
     }
+
+    .content-box{
+        margin-top: 20upx;
+        width: 100%;
+        .menu-recommend {
+            width: 100%;
+            height: 210upx;
+        }
+    }
+
 </style>
