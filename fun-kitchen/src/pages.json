@@ -4,8 +4,9 @@
     {
       "path": "pages/main/main",
       "style": {
-        "enablePullDownRefresh": true
+        "enablePullDownRefresh": true,
         //开启下拉刷新
+        "onReachBottomDistance":50
       }
     },
     {

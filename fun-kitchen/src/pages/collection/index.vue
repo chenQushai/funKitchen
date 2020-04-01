@@ -1,15 +1,24 @@
 <template>
     <div>
-        收藏
     </div>
 </template>
 
 <script>
+    import uLiLoadMore from "../../components/uLi-load-more.vue"
     export default {
-        name: "index"
+        name: "index",
+        components: {
+            uLiLoadMore
+        }
     }
 </script>
 
-<style scoped>
-
+<style lang="scss" scoped>
+    .tab-scroll {
+        white-space: nowrap;
+        .item {
+            display: inline-block;
+            width: 200px;
+        }
+    }
 </style>
