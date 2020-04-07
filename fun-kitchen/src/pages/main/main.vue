@@ -48,10 +48,10 @@
             <div class="rank-list" :key="index" v-for="(r,index) in rankList">
                 <p class="rank-name">{{r.rankName}}</p>
                 <scroll-view class="rank-item-box" scroll-x="true" >
-                    <view class="food-item">A</view>
-                    <view class="food-item">A</view>
-                    <view class="food-item">A</view>
-                    <view class="food-item">A</view>
+                    <view class="food-item" :key="index" v-for="(it,index)  in r.items">
+                        <img src="../../static/img/ycm.jpg" alt="">
+                        <p class="food-item-name">阳春面</p>
+                    </view>
                 </scroll-view>
             </div>
         </div>
@@ -65,11 +65,8 @@
     export default {
         data() {
             return {
-                tabActive:false,
+                tabActive:true,
                 loadMore: false,//加载更多
-                bg:{
-                    backgroudColor:'black'
-                },
                 recomList: [
                     {
                         url: require('../../static/img/1.jpg')
@@ -97,11 +94,15 @@
                         ]
                     },
                     {
-                        rankName: '热搜榜',
+                        rankName: '飙升榜',
                         content:'B'
                     },
                     {
-                        rankName: '热搜榜',
+                        rankName: '人气榜',
+                        content:'C'
+                    },
+                    {
+                        rankName: '新手榜',
                         content:'C'
                     },
                 ]
@@ -261,14 +262,31 @@
                 width: 100%;
                 height: 400upx;
                 white-space: nowrap;
-                overflow: scroll;
                 .food-item {
                     display: inline-block;
                     width: 39%;
                     height: 100%;
                     margin-right: 25upx;
-                    background-color: #007aff;
+                    img {
+                        width: 100%;
+                        height: 350upx;
+                        border-radius: 15upx;
+                    }
+                    .food-item-name {
+                        font-weight: bold;
+                        font-size: 28upx;
+                        text-align: left;
+                        font-family: 微软雅黑;
+                        overflow: hidden;
+                        text-overflow: ellipsis;
+                        white-space: nowrap;
+                    }
                 }
+            }
+            .rank-item-box ::-webkit-scrollbar{
+                width: 0;
+                height: 0;
+                background-color: transparent;
             }
 
         }

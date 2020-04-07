@@ -10,6 +10,13 @@
       }
     },
     {
+      "path": "pages/me/index",
+      "style": {
+        "enablePullDownRefresh": true
+        //开启下拉刷新
+      }
+    },
+    {
       "path": "pages/classify/index",
       "style": {
         "enablePullDownRefresh": true
@@ -18,13 +25,6 @@
     },
     {
       "path": "pages/collection/index",
-      "style": {
-        "enablePullDownRefresh": true
-        //开启下拉刷新
-      }
-    },
-    {
-      "path": "pages/me/index",
       "style": {
         "enablePullDownRefresh": true
         //开启下拉刷新

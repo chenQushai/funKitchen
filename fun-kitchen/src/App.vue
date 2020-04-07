@@ -66,7 +66,9 @@
         flex-direction: column;
         background-color: #FFFFFF;
         padding: 10px;
+
     }
+
 
     .input-group {
         background-color: #ffffff;
