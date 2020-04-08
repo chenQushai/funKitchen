@@ -7,7 +7,7 @@
                       size="14"/>
                 <input class="uni-input input" confirm-type="search" value="搜索"/>
             </div>
-            <button type="primary" class="search-btn" size="mini">搜索</button>
+            <button type="primary" class="search-btn" size="mini" @click="goSearchPage">搜索</button>
         </div>
 
         <div class="navTab">
@@ -19,7 +19,7 @@
                 <div class="menu-recommend">
                     <swiper style="width: 100%;height: 100%" class="swiper" :indicator-active-color="'#FFCE6B'" :indicator-dots="true" :autoplay="true" :interval="5000" :duration="500">
                             <swiper-item :key="index" v-for="(r,index) in recomList">
-                                <img :src="r.url" style="object-fit: cover;width: 100%;height: 100%" alt="菜单推荐">
+                                <img :src="r.url" style="object-fit: cover;width: 100%;height: 100%" alt="菜单推荐" @click="goDetail">
                             </swiper-item>
                     </swiper>
                 </div>
@@ -28,7 +28,7 @@
             text-align: center;margin-top: 40upx;
             font-weight: bold">-  今日精选推荐  -</p>
 
-            <div class="food-list" :key="index" v-for="(t,index) in todayRecommendList">
+            <div class="food-list" :key="index" v-for="(t,index) in todayRecommendList" @click="goDetail">
                 <p class="food-name">韭菜炒肉</p>
                 <div class="food-user-msg">
                     <span class="user-name">大海微澜</span>
@@ -48,7 +48,7 @@
             <div class="rank-list" :key="index" v-for="(r,index) in rankList">
                 <p class="rank-name">{{r.rankName}}</p>
                 <scroll-view class="rank-item-box" scroll-x="true" >
-                    <view class="food-item" :key="index" v-for="(it,index)  in r.items">
+                    <view class="food-item" :key="index" v-for="(it,index)  in r.items" @click="goDetail">
                         <img src="../../static/img/ycm.jpg" alt="">
                         <p class="food-item-name">阳春面</p>
                     </view>
@@ -116,6 +116,16 @@
                 else {
                     this.tabActive = false;
                 }
+            },
+            goDetail() {
+                uni.navigateTo({
+                    url:'../foodDetail/index'
+                })
+            },
+            goSearchPage() {
+                uni.navigateTo({
+                    url:'../searchPage/index'
+                })
             }
         },
 
@@ -137,39 +147,6 @@
 </script>
 
 <style scoped lang="scss">
-    .scan-box {
-        width: 100%;
-        height: 90upx;
-        padding-top: 20upx;
-
-        .input-box {
-            float: left;
-            width: 70%;
-            height: 74upx;
-            background-color: rgb(240, 240, 240);
-            border-radius: 74upx;
-            padding-left: 20upx;
-            line-height: 64upx;
-            .input {
-                float: left;
-                display: inline-block;
-                width: 80%;
-                margin-left: 37upx;
-                margin-top: 13upx;
-                color: rgb(154, 154, 154);
-                font-size: 12px;
-            }
-        }
-        .search-btn {
-            width: 150upx;
-            height: 74upx;
-            border-radius: 64upx;
-            line-height: 74upx;
-            margin-left: 40upx;
-            background-color: rgb(0, 0, 0);
-        }
-    }
-
     .navTab {
         width: 100%;
         height: 75upx;

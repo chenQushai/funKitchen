@@ -1,28 +1,31 @@
 <template>
     <div class="content">
-       <div class="user-content">
-           <img class="user-img" :src="userInfo.avatarUrl" alt="">
-           <p class="user-name">{{userInfo.nickName}}</p>
-       </div>
-        <uni-list>
-            <uni-list-item  title="收藏"  :thumb="require('../../static/img/collect.png')" :show-arrow="true"></uni-list-item>
-            <uni-list-item  title="浏览历史"  :thumb="require('../../static/img/history.png')" :show-arrow="false"></uni-list-item>
-        </uni-list>
+        <view v-if="isLogin">
+            <div class="user-content">
+                <img class="user-img" :src="userInfo.avatarUrl" alt="">
+                <p class="user-name">{{userInfo.nickName}}</p>
+            </div>
+            <uni-list>
+                <uni-list-item  title="收藏"  :thumb="require('../../static/img/collect.png')" :show-arrow="true"></uni-list-item>
+                <uni-list-item  title="浏览历史"  :thumb="require('../../static/img/history.png')" :show-arrow="false"></uni-list-item>
+            </uni-list>
 
-        <div class="look-history">
-            <div class="history-items">
-                <img src="../../static/img/ycm.jpg" alt="">
-                <p class="item-name">阳春面</p>
+            <div class="look-history">
+                <div class="history-items">
+                    <img src="../../static/img/ycm.jpg" alt="">
+                    <p class="item-name">阳春面</p>
+                </div>
+                <div class="history-items">
+                    <img src="../../static/img/ycm.jpg" alt="">
+                    <p class="item-name">阳春面</p>
+                </div>
+                <div class="history-items">
+                    <img src="../../static/img/ycm.jpg" alt="">
+                    <p class="item-name">阳春面</p>
+                </div>
             </div>
-            <div class="history-items">
-                <img src="../../static/img/ycm.jpg" alt="">
-                <p class="item-name">阳春面</p>
-            </div>
-            <div class="history-items">
-                <img src="../../static/img/ycm.jpg" alt="">
-                <p class="item-name">阳春面</p>
-            </div>
-        </div>
+        </view>
+        <button v-if="!isLogin" type="default" class="login-btn" open-type="getUserInfo" @getuserinfo="getUserInfo">点击登陆</button>
     </div>
 </template>
 
@@ -33,29 +36,21 @@
         name: "index",
         data() {
             return {
+                isLogin:false,
                 userInfo: {}
             }
         },
         created() {
-            this.login()
+            // this.login()
         },
         mounted() {
 
         },
         methods: {
-            login() {
-                uni.login({
-                    provider: 'weixin',
-                    success:  (loginRes) => {
-                        console.log(loginRes);
-                        uni.getUserInfo({
-                            provider: 'weixin',
-                            success: (infoRes)  => {
-                                this.userInfo = infoRes.userInfo;
-                            }
-                        });
-                    }
-                });
+            getUserInfo(data) {
+                console.log(data)
+                this.userInfo = data.mp.detail.userInfo;
+                this.isLogin = true;
             }
         },
         components: {
@@ -119,5 +114,12 @@
                 white-space: nowrap;
             }
         }
+    }
+
+    .login-btn {
+        width: 100%;
+        background-color: rgb(7,193,96);
+        border-radius: 40upx;
+        color: white;
     }
 </style>

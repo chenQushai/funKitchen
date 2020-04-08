@@ -29,6 +29,23 @@
         "enablePullDownRefresh": true
         //开启下拉刷新
       }
+    },
+    {
+      "path": "pages/foodDetail/index",
+      "style": {
+        "enablePullDownRefresh": true,
+        "navigationBarTitleText": "菜谱详情",
+        "navigationBarTextStyle":"black"
+        //开启下拉刷新
+      }
+    },
+    {
+      "path": "pages/searchPage/index",
+      "style": {
+        "enablePullDownRefresh": true,
+        "navigationBarTitleText": "菜谱搜索",
+        "navigationBarTextStyle":"black"
+      }
     }
   ],
   "tabBar": {

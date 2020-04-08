@@ -3,7 +3,7 @@
         <div class="classify-list" :key="index" v-for="(c,index) in classifyList">
             <p class="classify-name">{{c.className}}</p>
             <div class="class-items">
-                <div class="class-item" :class="index === 0? 'color-green': index === 1 ?  'color-orange':
+                <div class="class-item" @click="goSearchPage" :class="index === 0? 'color-green': index === 1 ?  'color-orange':
                  index === 2 ? 'color-blue': index === 3 ? 'color-yellow' : 'color-light-green'"
                      :key="item" v-for="(i,item) in c.classItem">A法芙娜</div>
             </div>
@@ -50,6 +50,13 @@
                         ]
                     }
                 ]
+            }
+        },
+        methods: {
+            goSearchPage() {
+                uni.navigateTo({
+                    url:'../searchPage/index'
+                })
             }
         }
     }
