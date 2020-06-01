@@ -41,7 +41,6 @@
             }
         },
         created() {
-            // this.login()
         },
         mounted() {
 
@@ -49,8 +48,22 @@
         methods: {
             getUserInfo(data) {
                 console.log(data)
-                this.userInfo = data.mp.detail.userInfo;
-                this.isLogin = true;
+                const _this = this;
+                uni.login({
+                    provider: 'weixin',
+                    success: function (loginRes) {
+                        console.log(loginRes);
+                        _this.$axios.postData('http://127.0.0.1:7002/login',{code: loginRes.code})
+                            .then((res) => {
+                                _this.userInfo = data.mp.detail.userInfo;
+                                _this.isLogin = true;
+                                console.log(res)
+                            })
+                            .catch((err) => {
+                                console.log(err)
+                            })
+                    }
+                });
             }
         },
         components: {
